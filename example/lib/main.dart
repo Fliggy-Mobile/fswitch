@@ -18,241 +18,218 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Builder(
-            builder: (context) => Container(
-                  padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+      home: FSwitchPage(),
+    );
+  }
+}
+
+class FSwitchPage extends StatefulWidget {
+  static const String routeName = '/fswitch';
+
+  @override
+  State<FSwitchPage> createState() => _FSwitchPageState();
+}
+
+class _FSwitchPageState extends State<FSwitchPage> {
+  var enable_1 = true;
+  var value_1 = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xffffc900),
+        title: const Text('FSwitch'),
+        centerTitle: true,
+      ),
+      body: Builder(
+          builder: (context) => SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Column(
                     children: <Widget>[
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
+                      _buildTitle("FSwitch"),
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      FSwitch(
+                        onChanged: (v) {},
                       ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '默认未选中 - 默认样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            value: false,
-                            onChanged: (v) {
-                              // do something
-                            },
-                          )
-                        ],
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      _buildDesc("一个简单的 FSwitch"),
+                      _buildTitle("FSwitch with child"),
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      Container(
+                        width: 300,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            FSwitch(
+                              width: 65.0,
+                              height: 35.538,
+                              onChanged: (v) {},
+                              closeChild: Text(
+                                "Off",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 11),
+                              ),
+                              openChild: Text(
+                                "On",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 11),
+                              ),
+                            ),
+                            FSwitch(
+                              open: true,
+                              onChanged: (v) {},
+                              closeChild: Icon(
+                                Icons.close,
+                                size: 16,
+                                color: Colors.white,
+                              ),
+                              openChild: Icon(
+                                Icons.check,
+                                size: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                            FSwitch(
+                              width: 65.0,
+                              height: 35.538,
+                              onChanged: (v) {},
+                              closeChild: Text(
+                                "😒",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              openChild: Text(
+                                "😃",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              childOffset: 3.0,
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      _buildDesc("FSwitch 支持自定义提示组件\n"
+                          "通过 unselectedChild 和 selectedChild 属性"),
+                      _buildMiddleMargin(),
+                      _buildTitle("Disable FSwitch"),
+                      _buildSmallMargin(),
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return Column(
+                            children: <Widget>[
+                              Text(
+                                enable_1 ? "可用状态" : "不可用状态",
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 12),
+                              ),
+                              _buildSmallMargin(),
+                              FSwitch(
+                                onChanged: (bool value) {
+                                  value_1 = value;
+                                },
+                                open: value_1,
+                                enable: enable_1,
+                                shadowColor: Colors.black.withOpacity(0.5),
+                                shadowBlur: 3.0,
+                              ),
+                              _buildSmallMargin(),
+                              RaisedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    enable_1 = !enable_1;
+                                  });
+                                },
+                                child: Text("Toggle disable"),
+                                color: Color(0xffffc900),
+                              )
+                            ],
+                          );
+                        },
                       ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '默认选中 - 默认样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            value: true,
-                            onChanged: (v) {},
-                          )
-                        ],
+                      _buildDesc("通过 enable 属性可以设置 FSwitch 的可用状态"),
+                      _buildMiddleMargin(),
+                      _buildTitle("Try Drag？"),
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      FSwitch(
+                        width: 300,
+                        height: 38,
+                        onChanged: (bool value) {},
+                        sliderChild: Text(
+                          "😃",
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
-                      ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '不可用状态 - 默认未选中 - 默认样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            value: false,
-                            onChanged: (v) {},
-                            enable: false,
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
-                      ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '不可用状态 - 默认选中 - 默认样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            value: true,
-                            onChanged: (v) {},
-                            enable: false,
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
-                      ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '默认未选中 - 自定义样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            width: 90,
-                            height: 36,
-                            value: false,
-                            onChanged: (v) {},
-                            text: 'OFF',
-                            selectedText: 'ON',
-                            color: Color(0xffffc900),
-                            backgroundColor: Colors.blueAccent,
-                            selectedBackgroundColor: Colors.black,
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
-                      ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '默认选中 - 自定义样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            width: 90,
-                            height: 36,
-                            value: true,
-                            onChanged: (v) {},
-                            text: 'OFF',
-                            selectedText: 'ON',
-                            color: Color(0xffffc900),
-                            backgroundColor: Colors.blueAccent,
-                            selectedBackgroundColor: Colors.black,
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
-                      ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '不可用状态 - 默认未选中 - 自定义样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            width: 90,
-                            height: 36,
-                            value: false,
-                            enable: false,
-                            onChanged: (v) {},
-                            text: 'OFF',
-                            selectedText: 'ON',
-                            color: Color(0xffffc900),
-                            backgroundColor: Colors.blueAccent,
-                            selectedBackgroundColor: Colors.black,
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
-                      ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '不可用状态 - 默认选中 - 自定义样式',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            width: 90,
-                            height: 36,
-                            value: true,
-                            enable: false,
-                            onChanged: (v) {
-                              // do something
-                            },
-                            text: 'OFF',
-                            selectedText: 'ON',
-                            color: Color(0xffffc900),
-                            backgroundColor: Colors.blueAccent,
-                            selectedBackgroundColor: Colors.black,
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 9),
-                      Divider(
-                        height: 0.5,
-                        color: Colors.grey[300],
-                      ),
-                      const SizedBox(height: 9),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            '拖拽试试？',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          FSwitch(
-                            width: 250,
-                            height: 30,
-                            value: false,
-                            onChanged: (v) {
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text("Current state is：" +
-                                    (v ? "True" : "False")),
-                                duration: Duration(milliseconds: 800),
-                              ));
-                            },
-                          )
-                        ],
-                      ),
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      _buildSmallMargin(),
+                      _buildDesc("FSwitch 除了支持点击切换状态，也支持拖拽手势"),
                     ],
                   ),
-                )),
+                ),
+              )),
+    );
+  }
+
+  SizedBox _buildMiddleMargin() {
+    return const SizedBox(
+      height: 18,
+    );
+  }
+
+  SizedBox _buildSmallMargin() {
+    return const SizedBox(
+      height: 10,
+    );
+  }
+
+  void _showDialog(BuildContext context, String msg) {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    msg,
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ],
+              ),
+              backgroundColor: Colors.black45,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+            ));
+  }
+
+  Padding _buildDesc(String desc) {
+    return Padding(
+        padding: const EdgeInsets.all(8),
+        child: Text(
+          desc,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 12,
+          ),
+        ));
+  }
+
+  Container _buildTitle(String title) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.all(9),
+      color: Color(0xffe0e0e0).withOpacity(0.38),
+      child: Text(
+        title,
+        style: TextStyle(color: Colors.grey),
       ),
     );
   }

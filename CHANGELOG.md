@@ -1,3 +1,9 @@
-## 0.0.1
+## 1.1.0
 
-* TODO: Describe initial release.
+- Support shadow
+
+- Support configuration **Slider** decoration
+
+- Improve interactivity
+
+- Optimization function

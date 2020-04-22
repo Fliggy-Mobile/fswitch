@@ -9,11 +9,11 @@
 
 <div align="center">
 
-<p>An interesting and practical switch component.</p>
+<p>一个有趣的、实用的开关组件。</p>
 
-<p>Supports setting tips, slider decorations, shadows, and good interaction.</p>
+<p>支持设置提示、滑块装饰、阴影以及良好的交互。</p>
 
-<p><strong>Author：<a href="https://github.com/chenBingX">Newton</a>(<a href="coorchice.cb@alibaba-inc.com">coorchice.cb@alibaba-inc.com</a>)</strong></p>
+<p><strong>主理人：<a href="https://github.com/chenBingX">纽特</a>(<a href="coorchice.cb@alibaba-inc.com">coorchice.cb@alibaba-inc.com</a>)</strong></p>
 
 <p>
 
@@ -52,46 +52,47 @@
 
 **[English](https://github.com/Fliggy-Android-Team/fswitch) | 简体中文**
 
-> Like it? Please cast your **Star**  🥰 ！
+> 感觉还不错？请投出您的 **Star** 吧 🥰 ！
 
-# ✨ Features
+# ✨ 特性
 
-- Support opening and closing tips
+- 支持打开、关闭的提示
 
-- Support setting decoration for **Slider**
+- 支持为 **Slider** 设置装饰
 
-- Support flexible configuration available state
+- 支持灵活的配置可用状态
 
-- More sense of space **Shadow**
+- 更具空间感的 **阴影**
 
-- Good switch interactive experience
+- 良好的开关交互体验
 
-# 🛠 Guide
+# 🛠 使用指南
 
-## ⚙️ Parameters
 
-|Param|Type|Necessary|Default|desc|
+## ⚙️ 参数
+
+|参数|类型|必要|默认值|说明|
 |---|---|:---:|---|---|
-|open|bool|false|false|Whether it is open. The default is false.|
-|onChanged|ValueChanged<bool>|true|null|This function will be called back when the switch state changes.|
-|width|double|false|59.23|width. Default 59.23, in line with aesthetics 😃|
-|height|double|false|null|height. By default, it will be calculated according to [width], which is in line with aesthetics 😃|
-|offset|double|false|null|Distance between slider and edge|
-|openChild|Widget|false|null|Prompt style of open state|
-|closeChild|Widget|false|null|Prompt style of closed state|
-|childOffset|double|false|null|Tip to edge distance|
-|color|Color|false|null|Background color when off|
-|openColor|Color|false|null|Background color when open|
-|sliderColor|Color|false|null|Slider color|
-|enable|bool|false|true|it's usable or not|
-|sliderChild|Widget|false|null|The component in the slider. Beyond the range will be cropped.|
-|shadowColor|Color|false|null|Set component shadow color|
-|shadowOffset|Offset|false|null|Set component shadow offset|
-|shadowBlur|double|false|0.0|Set the standard deviation of the component Gaussian and shadow shape convolution|
+|open|bool|否|false|是否处于打开状态。默认 false。|
+|onChanged|ValueChanged<bool>|是|null|当开关状态发生改变时，会回调该函数。|
+|width|double|否|59.23|宽度。默认 59.23，符合美学 😃|
+|height|double|否|null|高度。默认会根据 [width] 进行计算，符合美学 😃|
+|offset|double|否|null|滑块与边缘的间距|
+|openChild|Widget|否|null|打开状态的提示样式|
+|closeChild|Widget|否|null|关闭状态的提示样式|
+|childOffset|double|否|null|提示与边缘的间距|
+|color|Color|否|null|关闭状态下的背景色|
+|openColor|Color|否|null|打开状态下的背景色|
+|sliderColor|Color|否|null|滑块颜色|
+|enable|bool|否|true|是否可用|
+|sliderChild|Widget|否|null|滑块中的组件。超过范围会被剪裁。|
+|shadowColor|Color|否|null|设置组件阴影颜色|
+|shadowOffset|Offset|否|null|设置组件阴影偏移|
+|shadowBlur|double|否|0.0|设置组件高斯与阴影形状卷积的标准偏差|
 
-## 📺 Demo
+## 📺 使用示例
 
-### 🔩 Basic Demo
+### 🔩 基本使用
 
 ![](https://raw.githubusercontent.com/chenBingX/img/master/Flutter/fswitch/fswitch_normal.gif)
 
@@ -101,9 +102,9 @@ FSwitch(
 )
 ```
 
-**FSwitch** needs to always set `onChanged` in order to respond to the switch status.
+**FSwitch** 需要始终设置 `onChanged`，以便根据开关状态作出响应。
 
-### Available status & shadow
+### 可用状态 & 阴影
 
 ![](https://raw.githubusercontent.com/chenBingX/img/master/Flutter/fswitch/fswitch_enable_shadow.gif)
 
@@ -119,11 +120,11 @@ FSwitch(
 ),
 ```
 
-You can change the available status of **FSwitch** through `enable`. Once **FSwitch** becomes available, the switch state cannot be changed. 
+通过 `enable` 可以改变 **FSwitch** 的可用状态。一旦 **FSwitch** 变为可用状态，将无法再改变开关状态。
 
-In addition, **FSwitch** provides flexible and convenient shadow configuration support.
+此外，**FSwitch** 提供了灵活便捷的阴影配置支持。
 
-### 🌝 Prompt
+### 🌝 提示
 
 ![](https://raw.githubusercontent.com/chenBingX/img/master/Flutter/fswitch/fswitch_tip.gif)
 
@@ -179,10 +180,10 @@ FSwitch(
 ),
 ```
 
-The open and closed status indicators can be set for **FSwitch** through `openChild` and` closeChild`, respectively.
+通过 `openChild` 和 `closeChild` 可以分别为 **FSwitch** 设置打开、关闭的状态指示。
 
 
-### 👀 Slider decoration
+### 👀 Slider 装饰
 
 ![](https://raw.githubusercontent.com/chenBingX/img/master/Flutter/fswitch/fswitch_slider.gif)
 
@@ -198,36 +199,35 @@ FSwitch(
 )
 ```
 
-`sliderChild` will allow developers to set` child` decorations for **Slider**.
+`sliderChild` 将允许开发者为 **Slider** 设置 `child` 装饰。
 
-It's interesting!
+这很有趣！
 
+# 😃 如何使用？
 
-# 😃 How to use？
+在项目 `pubspec.yaml` 文件中添加依赖：
 
-Add dependencies in the project `pubspec.yaml` file:
-
-## 🌐 pub dependency
+## 🌐 pub 依赖方式
 
 ```
 dependencies:
-  fswitch: ^<version number>
+  fswitch: ^<版本号>
 ```
 
-> ⚠️ Attention，please go to [**pub**](https://pub.dev/packages/fswitch) to get the latest version number of **FSwitch**
+> ⚠️ 注意，请到 [**pub**](https://pub.dev/packages/fswitch) 获取 **FSwitch** 最新版本号
 
-## 🖥 git dependencies
+## 🖥 git 依赖方式
 
 ```
 dependencies:
   fswitch:
     git:
       url: 'git@github.com:Fliggy-Android-Team/fswitch.git'
-      ref: '<Branch number or tag number>'
+      ref: '<分支号 或 tag>'
 ```
 
 
-> ⚠️ Attention，please refer to [**FSwitch**](https://github.com/Fliggy-Android-Team/fswitch) official project for branch number or tag.
+> ⚠️ 注意，分支号 或 tag 请以 [**FSwitch**](https://github.com/Fliggy-Android-Team/fswitch) 官方项目为准。
 
 
 # 💡 License
@@ -250,5 +250,5 @@ limitations under the License.
 ```
 
 
-### Like it? Please cast your [**Star**](https://github.com/Fliggy-Android-Team/fswitch) 🥰 ！
+### 感觉还不错？请投出您的 [**Star**](https://github.com/Fliggy-Android-Team/fswitch) 吧 🥰 ！
 
