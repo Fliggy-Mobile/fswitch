@@ -76,4 +76,10 @@ web/
 .flutter-plugins-dependencies
 README.md
 test/
-
+macos/
+android/
+ios/
+test/
+.metadata
+pubspec.lock
+README.md
