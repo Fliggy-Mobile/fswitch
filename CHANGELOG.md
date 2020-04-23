@@ -7,3 +7,7 @@
 - Improve interactivity
 
 - Optimization function
+
+## 1.1.1 
+
+- Upgrade configuration

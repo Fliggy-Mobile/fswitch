@@ -1,11 +1,11 @@
 name: fswitch
 description: An interesting switch component.
-version: 1.1.0
+version: 1.1.1
 author: CoorChice<coorchice.cb@alibaba-inc.com>
 homepage: https://github.com/Fliggy-Android-Team/fswitch
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
