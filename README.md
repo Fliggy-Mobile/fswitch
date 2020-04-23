@@ -50,7 +50,7 @@
 
 </div>
 
-**[English](https://github.com/Fliggy-Android-Team/fswitch) | 简体中文**
+**English | [简体中文](https://github.com/Fliggy-Android-Team/fswitch/blob/master/README_CN.md)**
 
 > Like it? Please cast your **Star**  🥰 ！
 
