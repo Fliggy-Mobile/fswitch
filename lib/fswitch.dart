@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 ///
 /// An interesting and practical switch component.
 /// Supports setting tips, slider decorations, shadows, and good interaction.
+// ignore: must_be_immutable
 class FSwitch extends StatefulWidget {
   /// 是否处于打开状态。默认 false。
   ///
