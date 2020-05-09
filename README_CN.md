@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/Fliggy-Android-Team">
+  <a href="https://github.com/Fliggy-Mobile">
     <img width="200" src="https://gw.alicdn.com/tfs/TB1a288sxD1gK0jSZFKXXcJrVXa-360-360.png">
   </a>
 </p>
@@ -22,12 +22,12 @@
 </a>
 
 
-<a href="https://github.com/Fliggy-Android-Team/fswitch">
+<a href="https://github.com/Fliggy-Mobile/fswitch">
     <img height="20" src="https://img.shields.io/badge/Build-passing-brightgreen.svg">
 </a>
 
 
-<a href="https://github.com/Fliggy-Android-Team">
+<a href="https://github.com/Fliggy-Mobile">
     <img height="20" src="https://img.shields.io/badge/Team-FAT-ffc900.svg">
 </a>
 
@@ -50,7 +50,7 @@
 
 </div>
 
-**[English](https://github.com/Fliggy-Android-Team/fswitch) | 简体中文**
+**[English](https://github.com/Fliggy-Mobile/fswitch) | 简体中文**
 
 > 感觉还不错？请投出您的 **Star** 吧 🥰 ！
 
@@ -222,12 +222,12 @@ dependencies:
 dependencies:
   fswitch:
     git:
-      url: 'git@github.com:Fliggy-Android-Team/fswitch.git'
+      url: 'git@github.com:Fliggy-Mobile/fswitch.git'
       ref: '<分支号 或 tag>'
 ```
 
 
-> ⚠️ 注意，分支号 或 tag 请以 [**FSwitch**](https://github.com/Fliggy-Android-Team/fswitch) 官方项目为准。
+> ⚠️ 注意，分支号 或 tag 请以 [**FSwitch**](https://github.com/Fliggy-Mobile/fswitch) 官方项目为准。
 
 
 # 💡 License
@@ -250,5 +250,5 @@ limitations under the License.
 ```
 
 
-### 感觉还不错？请投出您的 [**Star**](https://github.com/Fliggy-Android-Team/fswitch) 吧 🥰 ！
+### 感觉还不错？请投出您的 [**Star**](https://github.com/Fliggy-Mobile/fswitch) 吧 🥰 ！
 
