@@ -165,7 +165,7 @@ class _FSwitch extends State<FSwitch> {
     widget.color = widget.color ?? Color(0xffcccccc);
     widget.openColor = widget.openColor ?? Color(0xffffc900);
 
-    List<Widget?> children = [];
+    List<Widget> children = [];
 
     /// background
     var showShadow = widget.shadowColor != null && widget.shadowBlur != 0;
@@ -258,7 +258,7 @@ class _FSwitch extends State<FSwitch> {
       child: Container(
         child: Stack(
           alignment: Alignment.centerLeft,
-          children: children as List<Widget>,
+          children: children,
         ),
       ),
     );
