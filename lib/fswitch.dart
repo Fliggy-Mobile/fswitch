@@ -96,6 +96,12 @@ class FSwitch extends StatefulWidget {
   /// Sets the standard deviation of the child's Gaussian convolution with the shadow shape.
   double childShadowBlur;
 
+  /// Border on the child
+  double? childBorderWidth;
+
+  /// Color of border on the child
+  Color childBorderColor;
+
   FSwitch({
     Key? key,
     required this.onChanged,
@@ -117,6 +123,8 @@ class FSwitch extends StatefulWidget {
     this.childShadowColor,
     this.childShadowOffset,
     this.childShadowBlur = 0.0,
+    this.childBorderWidth,
+    this.childBorderColor = Colors.grey,
   })  : assert(open != null && onChanged != null,
             "open and onChanged can't be None!"),
         super(key: key);
@@ -218,6 +226,12 @@ class _FSwitch extends State<FSwitch> {
           borderRadius: BorderRadius.all(
             Radius.circular(circleSize / 2.0),
           ),
+          border: widget.childBorderWidth != null
+              ? Border.all(
+                  width: widget.childBorderWidth!,
+                  color: widget.childBorderColor,
+                )
+              : null,
           boxShadow: showChildShadow
               ? [
                   BoxShadow(
