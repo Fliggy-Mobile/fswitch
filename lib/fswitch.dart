@@ -25,47 +25,47 @@ class FSwitch extends StatefulWidget {
   /// 高度。默认会根据 [width] 进行计算，符合美学 😃
   ///
   /// height. By default, it will be calculated according to [width], which is in line with aesthetics 😃
-  double height;
+  double? height;
 
   /// 滑块与边缘的间距
   ///
   /// Distance between slider and edge
-  double offset;
+  double? offset;
 
   /// 打开状态的提示样式
   ///
   /// Prompt style of open state
-  Widget openChild;
+  Widget? openChild;
 
   /// 关闭状态的提示样式
   ///
   /// Prompt style of closed state
-  Widget closeChild;
+  Widget? closeChild;
 
   /// 提示与边缘的间距
   ///
   /// Prompt to edge distance
-  double childOffset;
+  double? childOffset;
 
   /// 关闭状态下的背景色
   ///
   /// Background color when off
-  Color color;
+  Color? color;
 
   /// 打开状态下的背景色
   ///
   /// Background color when open
-  Color openColor;
+  Color? openColor;
 
   /// 滑块颜色
   ///
   /// Slider color
-  Color sliderColor;
+  Color? sliderColor;
 
   /// 滑块中的组件。超过范围会被剪裁。
   ///
   /// Components in the slider。Beyond the range will be cropped。
-  Widget sliderChild;
+  Widget? sliderChild;
 
   /// 是否可用
   ///
@@ -75,21 +75,36 @@ class FSwitch extends StatefulWidget {
   /// 设置组件阴影颜色
   ///
   /// Set component shadow color
-  Color shadowColor;
+  Color? shadowColor;
 
   /// 设置组件阴影偏移
   ///
   /// Set component shadow offset
-  Offset shadowOffset;
+  Offset? shadowOffset;
 
   /// 设置组件高斯与阴影形状卷积的标准偏差。
   ///
   /// Sets the standard deviation of the component's Gaussian convolution with the shadow shape.
   double shadowBlur;
 
+  /// Set child shadow color
+  Color? childShadowColor;
+
+  /// Set child shadow offset
+  Offset? childShadowOffset;
+
+  /// Sets the standard deviation of the child's Gaussian convolution with the shadow shape.
+  double childShadowBlur;
+
+  /// Border on the child
+  double? childBorderWidth;
+
+  /// Color of border on the child
+  Color childBorderColor;
+
   FSwitch({
-    Key key,
-    @required this.onChanged,
+    Key? key,
+    required this.onChanged,
     this.open = false,
     this.width = 59.23,
     this.height,
@@ -105,6 +120,11 @@ class FSwitch extends StatefulWidget {
     this.shadowColor,
     this.shadowOffset,
     this.shadowBlur = 0.0,
+    this.childShadowColor,
+    this.childShadowOffset,
+    this.childShadowBlur = 0.0,
+    this.childBorderWidth,
+    this.childBorderColor = Colors.grey,
   })  : assert(open != null && onChanged != null,
             "open and onChanged can't be None!"),
         super(key: key);
@@ -116,7 +136,7 @@ class FSwitch extends StatefulWidget {
 }
 
 class _FSwitch extends State<FSwitch> {
-  double fixOffset;
+  late double fixOffset;
   bool draging = false;
   double dragDxW = 10.0;
 
@@ -165,7 +185,7 @@ class _FSwitch extends State<FSwitch> {
         boxShadow: showShadow
             ? [
                 BoxShadow(
-                  color: widget.shadowColor,
+                  color: widget.shadowColor!,
                   offset: widget.shadowOffset ?? Offset(0, 0),
                   blurRadius: widget.shadowBlur,
                 )
@@ -191,8 +211,10 @@ class _FSwitch extends State<FSwitch> {
     }
 
     /// slider
+    var showChildShadow =
+        widget.childShadowColor != null && widget.childShadowBlur != 0;
     var slider = AnimatedContainer(
-      margin: EdgeInsets.fromLTRB(widget.offset + fixOffset, 0, 0, 0),
+      margin: EdgeInsets.fromLTRB(widget.offset! + fixOffset, 0, 0, 0),
       duration: Duration(milliseconds: 200),
       width: circleSize + (draging ? dragDxW : 0.0),
       child: Container(
@@ -200,8 +222,26 @@ class _FSwitch extends State<FSwitch> {
         clipBehavior: Clip.antiAlias,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            color: widget.sliderColor ?? Color(0xffffffff),
-            borderRadius: BorderRadius.all(Radius.circular(circleSize / 2.0))),
+          color: widget.sliderColor ?? Color(0xffffffff),
+          borderRadius: BorderRadius.all(
+            Radius.circular(circleSize / 2.0),
+          ),
+          border: widget.childBorderWidth != null
+              ? Border.all(
+                  width: widget.childBorderWidth!,
+                  color: widget.childBorderColor,
+                )
+              : null,
+          boxShadow: showChildShadow
+              ? [
+                  BoxShadow(
+                    color: widget.childShadowColor!,
+                    offset: widget.childShadowOffset ?? Offset(0, 0),
+                    blurRadius: widget.childShadowBlur,
+                  )
+                ]
+              : null,
+        ),
         child: widget.sliderChild,
       ),
     );
@@ -244,7 +284,7 @@ class _FSwitch extends State<FSwitch> {
       double height = widget.height ?? widget.width * 0.608;
       double circleSize = (height * (32.52 / 36.0));
       if (widget.open) {
-        fixOffset = widget.width - widget.offset - circleSize - widget.offset;
+        fixOffset = widget.width - widget.offset! - circleSize - widget.offset!;
       } else {
         fixOffset = 0;
       }
@@ -267,15 +307,15 @@ class _FSwitch extends State<FSwitch> {
         fixOffset = 0;
       } else if (fixOffset >
           widget.width -
-              widget.offset -
+              widget.offset! -
               circleSize -
               (draging ? dragDxW : 0.0) -
-              widget.offset) {
+              widget.offset!) {
         fixOffset = widget.width -
-            widget.offset -
+            widget.offset! -
             circleSize -
             (draging ? dragDxW : 0.0) -
-            widget.offset;
+            widget.offset!;
       }
     });
   }
@@ -286,10 +326,10 @@ class _FSwitch extends State<FSwitch> {
       double height = widget.height ?? widget.width * 0.608;
       double circleSize = (height * (32.52 / 36.0));
       double center = (widget.width -
-              widget.offset -
+              widget.offset! -
               circleSize -
               (draging ? dragDxW : 0.0) -
-              widget.offset) /
+              widget.offset!) /
           2;
       bool cacheValue = widget.open;
       if (fixOffset < center) {
