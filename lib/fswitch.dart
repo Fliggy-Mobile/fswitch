@@ -20,76 +20,76 @@ class FSwitch extends StatefulWidget {
   /// 宽度。默认 59.23，符合美学 😃
   ///
   /// width. Default 59.23, in line with aesthetics 😃
-  double width;
+  double? width;
 
   /// 高度。默认会根据 [width] 进行计算，符合美学 😃
   ///
   /// height. By default, it will be calculated according to [width], which is in line with aesthetics 😃
-  double height;
+  double? height;
 
   /// 滑块与边缘的间距
   ///
   /// Distance between slider and edge
-  double offset;
+  double? offset;
 
   /// 打开状态的提示样式
   ///
   /// Prompt style of open state
-  Widget openChild;
+  Widget? openChild;
 
   /// 关闭状态的提示样式
   ///
   /// Prompt style of closed state
-  Widget closeChild;
+  Widget? closeChild;
 
   /// 提示与边缘的间距
   ///
   /// Prompt to edge distance
-  double childOffset;
+  double? childOffset;
 
   /// 关闭状态下的背景色
   ///
   /// Background color when off
-  Color color;
+  Color? color;
 
   /// 打开状态下的背景色
   ///
   /// Background color when open
-  Color openColor;
+  Color? openColor;
 
   /// 滑块颜色
   ///
   /// Slider color
-  Color sliderColor;
+  Color? sliderColor;
 
   /// 滑块中的组件。超过范围会被剪裁。
   ///
   /// Components in the slider。Beyond the range will be cropped。
-  Widget sliderChild;
+  Widget? sliderChild;
 
   /// 是否可用
   ///
   /// it's usable or not
-  bool enable;
+  bool enable = true;
 
   /// 设置组件阴影颜色
   ///
   /// Set component shadow color
-  Color shadowColor;
+  Color? shadowColor;
 
   /// 设置组件阴影偏移
   ///
   /// Set component shadow offset
-  Offset shadowOffset;
+  Offset? shadowOffset;
 
   /// 设置组件高斯与阴影形状卷积的标准偏差。
   ///
   /// Sets the standard deviation of the component's Gaussian convolution with the shadow shape.
-  double shadowBlur;
+  double? shadowBlur;
 
   FSwitch({
-    Key key,
-    @required this.onChanged,
+    Key? key,
+    required this.onChanged,
     this.open = false,
     this.width = 59.23,
     this.height,
@@ -116,37 +116,38 @@ class FSwitch extends StatefulWidget {
 }
 
 class _FSwitch extends State<FSwitch> {
-  double fixOffset;
+  double fixOffset = 0;
   bool draging = false;
   double dragDxW = 10.0;
 
   @override
   void initState() {
     super.initState();
+    double width = widget.width ?? 0;
     fixOffset = widget.open
-        ? widget.width -
-            (widget.offset ??
-                    2.0 / 36.0 * ((widget.height ?? widget.width * 0.608))) *
+        ? width -
+            (widget.offset ?? 2.0 / 36.0 * ((widget.height ?? width * 0.608))) *
                 2.0 -
-            (widget.height ?? widget.width * 0.608) * (32.52 / 36.0)
+            (widget.height ?? width * 0.608) * (32.52 / 36.0)
         : 0;
   }
 
   @override
   void didUpdateWidget(FSwitch oldWidget) {
     super.didUpdateWidget(oldWidget);
+    double width = widget.width ?? 0;
     fixOffset = widget.open
-        ? widget.width -
+        ? width -
             (widget.offset ??
-                    2.0 / 36.0 * ((widget.height ?? widget.width * 0.608))) *
+                    2.0 / 36.0 * ((widget.height ?? width * 0.608))) *
                 2.0 -
-            (widget.height ?? widget.width * 0.608) * (32.52 / 36.0)
+            (widget.height ?? width * 0.608) * (32.52 / 36.0)
         : 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = widget.height ?? widget.width * 0.608;
+    double height = widget.height ?? widget.width ?? 0 * 0.608;
     double circleSize = (height * (32.52 / 36.0));
     widget.offset = widget.offset ?? 2.0 / 36.0 * height;
     double childOffset = widget.childOffset ?? height / 5.0;
@@ -165,9 +166,9 @@ class _FSwitch extends State<FSwitch> {
         boxShadow: showShadow
             ? [
                 BoxShadow(
-                  color: widget.shadowColor,
+                  color: widget.shadowColor!,
                   offset: widget.shadowOffset ?? Offset(0, 0),
-                  blurRadius: widget.shadowBlur,
+                  blurRadius: widget.shadowBlur ?? 1.0,
                 )
               ]
             : null,
@@ -192,7 +193,7 @@ class _FSwitch extends State<FSwitch> {
 
     /// slider
     var slider = AnimatedContainer(
-      margin: EdgeInsets.fromLTRB(widget.offset + fixOffset, 0, 0, 0),
+      margin: EdgeInsets.fromLTRB(widget.offset ?? 0 + fixOffset, 0, 0, 0),
       duration: Duration(milliseconds: 200),
       width: circleSize + (draging ? dragDxW : 0.0),
       child: Container(
@@ -241,10 +242,10 @@ class _FSwitch extends State<FSwitch> {
   void _handleOnTap() {
     setState(() {
       widget.open = !widget.open;
-      double height = widget.height ?? widget.width * 0.608;
+      double height = widget.height ?? widget.width ?? 0 * 0.608;
       double circleSize = (height * (32.52 / 36.0));
       if (widget.open) {
-        fixOffset = widget.width - widget.offset - circleSize - widget.offset;
+        fixOffset = widget.width ?? 0 - (widget.offset ?? 0) - circleSize - (widget.offset ??0);
       } else {
         fixOffset = 0;
       }
@@ -260,22 +261,24 @@ class _FSwitch extends State<FSwitch> {
 
   void _handleOnHorizontalDragUpdate(DragUpdateDetails details) {
     setState(() {
-      double height = widget.height ?? widget.width * 0.608;
+      double width = widget.width ?? 0;
+      double height = widget.height ?? width * 0.608;
       double circleSize = (height * (32.52 / 36.0));
       fixOffset = fixOffset + details.delta.dx;
+      double offset = widget.offset ?? 0;
       if (fixOffset < 0) {
         fixOffset = 0;
       } else if (fixOffset >
-          widget.width -
-              widget.offset -
+          width -
+              offset -
               circleSize -
               (draging ? dragDxW : 0.0) -
-              widget.offset) {
-        fixOffset = widget.width -
-            widget.offset -
+              offset) {
+        fixOffset = width -
+            offset -
             circleSize -
             (draging ? dragDxW : 0.0) -
-            widget.offset;
+            offset;
       }
     });
   }
@@ -283,13 +286,15 @@ class _FSwitch extends State<FSwitch> {
   void _handleOnHorizontalDragEnd(DragEndDetails details) {
     setState(() {
       draging = false;
-      double height = widget.height ?? widget.width * 0.608;
+      double width = widget.width ?? 0;
+      double height = widget.height ?? width * 0.608;
       double circleSize = (height * (32.52 / 36.0));
-      double center = (widget.width -
-              widget.offset -
+      double offset = widget.offset ?? 0;
+      double center = (width -
+              offset -
               circleSize -
               (draging ? dragDxW : 0.0) -
-              widget.offset) /
+              offset) /
           2;
       bool cacheValue = widget.open;
       if (fixOffset < center) {
