@@ -115,15 +115,15 @@ class _FSwitchPageState extends State<FSwitchPage> {
               shadowBlur: 3.0,
             ),
             buildSmallMargin(),
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  enable_1 = !enable_1;
-                });
-              },
-              child: Text("Toggle disable"),
-              color: Color(0xffffc900),
-            )
+            // RaisedButton(
+            //   onPressed: () {
+            //     setState(() {
+            //       enable_1 = !enable_1;
+            //     });
+            //   },
+            //   child: Text("Toggle disable"),
+            //   color: Color(0xffffc900),
+            // )
           ],
         );
       },

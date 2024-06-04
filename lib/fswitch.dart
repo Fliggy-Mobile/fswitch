@@ -126,9 +126,9 @@ class _FSwitch extends State<FSwitch> {
     double width = widget.width ?? 0;
     fixOffset = widget.open
         ? width -
-            (widget.offset ?? 2.0 / 36.0 * ((widget.height ?? width * 0.608))) *
+            (widget.offset ?? 2.0 / 36.0 * ((widget.height ?? (width * 0.608)))) *
                 2.0 -
-            (widget.height ?? width * 0.608) * (32.52 / 36.0)
+            (widget.height ?? (width * 0.608)) * (32.52 / 36.0)
         : 0;
   }
 
@@ -139,15 +139,15 @@ class _FSwitch extends State<FSwitch> {
     fixOffset = widget.open
         ? width -
             (widget.offset ??
-                    2.0 / 36.0 * ((widget.height ?? width * 0.608))) *
+                    2.0 / 36.0 * ((widget.height ?? (width * 0.608)))) *
                 2.0 -
-            (widget.height ?? width * 0.608) * (32.52 / 36.0)
+            (widget.height ?? (width * 0.608)) * (32.52 / 36.0)
         : 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = widget.height ?? widget.width ?? 0 * 0.608;
+    double height = widget.height ?? ((widget.width ?? 0) * 0.608);
     double circleSize = (height * (32.52 / 36.0));
     widget.offset = widget.offset ?? 2.0 / 36.0 * height;
     double childOffset = widget.childOffset ?? height / 5.0;
@@ -193,7 +193,7 @@ class _FSwitch extends State<FSwitch> {
 
     /// slider
     var slider = AnimatedContainer(
-      margin: EdgeInsets.fromLTRB(widget.offset ?? 0 + fixOffset, 0, 0, 0),
+      margin: EdgeInsets.fromLTRB((widget.offset ?? 0) + fixOffset, 0, 0, 0),
       duration: Duration(milliseconds: 200),
       width: circleSize + (draging ? dragDxW : 0.0),
       child: Container(
@@ -242,10 +242,13 @@ class _FSwitch extends State<FSwitch> {
   void _handleOnTap() {
     setState(() {
       widget.open = !widget.open;
-      double height = widget.height ?? widget.width ?? 0 * 0.608;
+      double height = widget.height ?? ((widget.width ?? 0) * 0.608);
       double circleSize = (height * (32.52 / 36.0));
       if (widget.open) {
-        fixOffset = widget.width ?? 0 - (widget.offset ?? 0) - circleSize - (widget.offset ??0);
+        fixOffset = (widget.width ?? 0) -
+            (widget.offset ?? 0) -
+            circleSize -
+            (widget.offset ?? 0);
       } else {
         fixOffset = 0;
       }
@@ -262,23 +265,16 @@ class _FSwitch extends State<FSwitch> {
   void _handleOnHorizontalDragUpdate(DragUpdateDetails details) {
     setState(() {
       double width = widget.width ?? 0;
-      double height = widget.height ?? width * 0.608;
+      double height = widget.height ?? (width * 0.608);
       double circleSize = (height * (32.52 / 36.0));
       fixOffset = fixOffset + details.delta.dx;
       double offset = widget.offset ?? 0;
       if (fixOffset < 0) {
         fixOffset = 0;
       } else if (fixOffset >
-          width -
-              offset -
-              circleSize -
-              (draging ? dragDxW : 0.0) -
-              offset) {
-        fixOffset = width -
-            offset -
-            circleSize -
-            (draging ? dragDxW : 0.0) -
-            offset;
+          width - offset - circleSize - (draging ? dragDxW : 0.0) - offset) {
+        fixOffset =
+            width - offset - circleSize - (draging ? dragDxW : 0.0) - offset;
       }
     });
   }
@@ -287,15 +283,12 @@ class _FSwitch extends State<FSwitch> {
     setState(() {
       draging = false;
       double width = widget.width ?? 0;
-      double height = widget.height ?? width * 0.608;
+      double height = widget.height ?? (width * 0.608);
       double circleSize = (height * (32.52 / 36.0));
       double offset = widget.offset ?? 0;
-      double center = (width -
-              offset -
-              circleSize -
-              (draging ? dragDxW : 0.0) -
-              offset) /
-          2;
+      double center =
+          (width - offset - circleSize - (draging ? dragDxW : 0.0) - offset) /
+              2;
       bool cacheValue = widget.open;
       if (fixOffset < center) {
         fixOffset = 0;
