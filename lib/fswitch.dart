@@ -105,9 +105,7 @@ class FSwitch extends StatefulWidget {
     this.shadowColor,
     this.shadowOffset,
     this.shadowBlur = 0.0,
-  })  : assert(open != null && onChanged != null,
-            "open and onChanged can't be None!"),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
